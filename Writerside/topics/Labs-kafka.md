@@ -161,7 +161,7 @@ _**Open separate terminal windows for next steps**_
 
 2. go to producer module
    ```bash
-   cd lab/producer
+   cd labs_kafka/producer
    ```
 3. complete code for `ProducerConfig`, `ProducerRecord`, and `KafkaProducer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
@@ -191,7 +191,7 @@ _**Open separate terminal windows for next steps**_
 
 2. go to consumer module
    ```bash
-   cd lab/consumer
+   cd labs_kafka/consumer
    ```
 3. complete code for `ConsumerConfig`, `KafkaConsumer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
@@ -376,4 +376,32 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
 
 ## Lab 07 : Deploy a kafka connect {collapsible="true"}
 ## Lab 08 : Basic kafka stream {collapsible="true"}
+
+* You will create a simple Kafka Streams application that reads data from a source topic
+* processes it
+* and writes the results to a destination topic
+
+1. Execute the following command in the terminal to clone lab projects (this step not necessary if you have already done it in the previous lab) :
+
+   ```bash
+   git clone https://github.com/MohamedKaraga/labs_kafka.git
+   ```
+2. go to kafkastream module
+   ```bash
+   cd labs_kafka/kafkastream
+   ```
+3. complete code for `StreamsConfig`, `StreamsBuilder` and `KafkaStreams`.
+4. Start kafka cluster stack with the -d option to run in detached mode:
+   ```bash
+   docker-compose up -d
+   ```
+5. build and run kafkastream
+6. Advanced : apply windowed aggregation to count the number of vehicles every 1 minute
+
+Transform the Kafka Streams application to use windowed operations,
+For this exercise, let's assume you want to use `tumbling` windows to count the number of vehicles within a certain time window 
+and generate congestion alerts based on the counts within each window.
+
+
+
 ## Lab 09 : introduce KsqlDB {collapsible="true"}
