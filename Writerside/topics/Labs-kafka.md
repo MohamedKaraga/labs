@@ -149,28 +149,29 @@ _**Open separate terminal windows for next steps**_
 
 ## Lab 03 : Producer {collapsible="true"}
 
+* Simulate Kafka producer embedded in IoT devices to collect sensor data.
+* Configure producers to publish sensor data to Kafka topic representing different sensor.
+* Implement mechanisms for data batching, compression to optimize data transmission.
+
 1. Execute the following command in the terminal to clone lab projects :
 
    ```bash
-   git clone https://github.com/MohamedKaraga/lab.git
+   git clone https://github.com/MohamedKaraga/labs_kafka.git
    ```
 
 2. go to producer module
    ```bash
    cd lab/producer
    ```
-3. complete code
+3. complete code for `ProducerConfig`, `ProducerRecord`, and `KafkaProducer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
    docker-compose up -d
    ```
 5. build and run producer
-
-   * Simulate Kafka producers embedded in IoT devices to collect sensor data (e.g. temperature).
-   * Configure producers to publish sensor data to Kafka topics representing different sensor types.
-   * Implement mechanisms for data batching, compression to optimize data transmission
-
-6. Stop kafka cluster stack with -v to remove volumes
+6. Run the producer with different configurations for `linger.ms` and `batch.size` to observe their effects on message batching and sending time.
+7. Add compression type to optimize data transmission (`snappy` or `gzip` or `lz4`)
+8. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
    docker-compose down -v
@@ -178,27 +179,29 @@ _**Open separate terminal windows for next steps**_
    
 ## Lab 04 : Consumer {collapsible="true"}
 
-1. Execute the following command in the terminal to clone lab projects :
+* Configure Kafka consumer to ingest sensor data from Kafka topic in real-time.
+* Process incoming data
+* You will learn how to tweak settings such as `fetch.min.bytes`, `fetch.max.wait.ms`, `max.poll.records` to achieve optimal performance.
+
+1. Execute the following command in the terminal to clone lab projects (this step not necessary if you have already done it in the previous lab) :
 
    ```bash
-   git clone https://github.com/MohamedKaraga/lab.git
+   git clone https://github.com/MohamedKaraga/labs_kafka.git
    ```
 
-2. go to producer module
+2. go to consumer module
    ```bash
    cd lab/consumer
    ```
-3. complete code
+3. complete code for `ConsumerConfig`, `KafkaConsumer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
    docker-compose up -d
    ```
 5. build and run consumer
 
-   * Configure Kafka consumer to ingest sensor data from Kafka topic in real-time.
-   * Process incoming data to detect anomalies
-
-6. Stop kafka cluster stack with -v to remove volumes
+6. Run the consumer with different configurations for `fetch.min.bytes`, `fetch.max.wait.ms`,and `max.poll.records` to observe their effects on message consumption and performance.
+7. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
    docker-compose down -v
@@ -250,7 +253,7 @@ _**Open separate terminal windows for next steps**_
    ```bash
    docker-compose down -v
    ```
-   
+
 ## Lab 06 : Schema Registry {collapsible="true"}
 
 1. Start kafka cluster stack with the -d option to run in detached mode
@@ -370,3 +373,7 @@ _**Open separate terminal windows for next steps**_
    * Execute the Consumer class and verify that the consumer reads the message from the `users` topic.
 
 You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
+
+## Lab 07 : Deploy a kafka connect {collapsible="true"}
+## Lab 08 : Basic kafka stream {collapsible="true"}
+## Lab 09 : introduce KsqlDB {collapsible="true"}
