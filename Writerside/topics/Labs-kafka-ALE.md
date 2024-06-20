@@ -88,7 +88,7 @@
 
 * Configure Kafka consumer to ingest sensor data from Kafka topic in real-time.
 * Process incoming data
-* You will learn how to tweak settings such as `fetch.min.bytes`, `fetch.max.wait.ms`, `max.poll.records` to achieve optimal performance.
+* You will learn how to tweak settings such as `fetch.min.bytes`, `fetch.max.wait.ms` to achieve optimal performance.
 
 1. Execute the following command in the terminal to clone lab projects (this step not necessary if you have already done it in the previous lab) :
 
