@@ -553,18 +553,39 @@ and generate congestion alerts based on the counts within each window.
       kafka-console-producer --bootstrap-server kafka:9092 --topic users
       ``` 
    
-8. Enter the following JSON messages, each representing a user record
+8. Enter the following JSON messages, each representing a `user` record
 
    ```JSON
    {"id": 1, "name": "toto", "email": "toto.doe@example.com", "created_at": "2024-06-23T12:00:00Z"}
    ```   
 
    ```JSON
-   {"id": 2, "name": "titi", "email": "titi@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   {"id": 2, "name": "titi", "email": "titi@example.com", "created_at": "2024-05-23T12:05:00Z"}
    ```
    
    ```JSON
    {"id": 3, "name": "tata", "email": "tata@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   ```
+   
+   ```JSON
+   {"id": 4, "name": "jo", "email": "jo.doe@example.com", "created_at": "2024-05-23T12:00:00Z"}
+   ```   
+
+   ```JSON
+   {"id": 5, "name": "ohe", "email": "ohe@example.com", "created_at": "2024-05-23T12:05:00Z"}
+   ```
+   
+   ```JSON
+   {"id": 6, "name": "yao", "email": "yao@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   ```
+   
+9. Creates a table called user_counts that stores the count of `users` grouped by their `created_at`
+
+   ```SQL
+   CREATE TABLE user_counts AS
+   SELECT created_at, COUNT(*) AS count
+   FROM users
+   GROUP BY created_at;
    ```
 
 
