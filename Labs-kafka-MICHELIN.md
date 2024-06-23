@@ -517,43 +517,21 @@ and generate congestion alerts based on the counts within each window.
    ```bash
    docker-compose up -d broker control-center ksqldb-server ksqldb-cli
    ```
-2. Access the ksqlDB server's web interface by navigating to http://localhost:8088 in your web browser. This should bring up the ksqlDB server interface
-3. Access the ksqlDB CLI to run ksqlDB queries
-
-   ```bash
-   docker-compose exec ksqldb-cli bash
-   ```
-4. Inside the shell, connect to the ksqlDB server using the ksqlDB CLI
-
-   ```bash
-   ksql http://ksqldb-server:8088
-   ```
-
-5. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
-
-   ```SQL
-   CREATE STREAM users_stream (id INT, name VARCHAR, email VARCHAR, created_at VARCHAR) WITH (KAFKA_TOPIC='users',VALUE_FORMAT='JSON');
-   ```
-6. Query the users_stream to see the data
-
-   ```SQL
-   SELECT * FROM users_stream EMIT CHANGES;
-   ```
    
-7. In new terminal, use the Kafka console producer to send messages to the `users` topic 
+2. Use the Kafka console producer to send messages to the `users` topic
 
    * Run inside `broker` container console
       ```bash
       docker-compose exec broker /bin/bash
       ```
-  
+
    * Run Kafka console producer
 
       ```bash
       kafka-console-producer --bootstrap-server kafka:9092 --topic users
       ``` 
-   
-8. Enter the following JSON messages, each representing a `user` record
+
+3. Enter the following JSON messages, each representing a `user` record
 
    ```JSON
    {"id": 1, "name": "toto", "email": "toto.doe@example.com", "created_at": "2024-06-23T12:00:00Z"}
@@ -562,11 +540,11 @@ and generate congestion alerts based on the counts within each window.
    ```JSON
    {"id": 2, "name": "titi", "email": "titi@example.com", "created_at": "2024-05-23T12:05:00Z"}
    ```
-   
+
    ```JSON
    {"id": 3, "name": "tata", "email": "tata@example.com", "created_at": "2024-06-23T12:05:00Z"}
    ```
-   
+
    ```JSON
    {"id": 4, "name": "jo", "email": "jo.doe@example.com", "created_at": "2024-05-23T12:00:00Z"}
    ```   
@@ -574,11 +552,38 @@ and generate congestion alerts based on the counts within each window.
    ```JSON
    {"id": 5, "name": "ohe", "email": "ohe@example.com", "created_at": "2024-05-23T12:05:00Z"}
    ```
-   
+
    ```JSON
    {"id": 6, "name": "yao", "email": "yao@example.com", "created_at": "2024-06-23T12:05:00Z"}
    ```
    
+4. Exit `broker` container and access the ksqlDB server's web interface by navigating to http://localhost:8088 in your web browser. This should bring up the ksqlDB server interface
+5. Access the ksqlDB CLI to run ksqlDB queries
+
+   ```bash
+   docker-compose exec ksqldb-cli bash
+   ```
+6. Inside the shell, connect to the ksqlDB server using the ksqlDB CLI
+
+   * Connect to the ksqlDB server
+   ```bash
+   ksql http://ksqldb-server:8088
+   ```
+   * Set the Offset to Earliest
+   ```bash
+   SET 'auto.offset.reset' = 'earliest';
+   ```
+
+7. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
+
+   ```SQL
+   CREATE STREAM users_stream (id INT, name VARCHAR, email VARCHAR, created_at VARCHAR) WITH (KAFKA_TOPIC='users',VALUE_FORMAT='JSON');
+   ```
+8. Query the users_stream to see the data
+
+   ```SQL
+   SELECT * FROM users_stream EMIT CHANGES;
+   ```
 9. Creates a table called user_counts that stores the count of `users` grouped by their `created_at`
 
    ```SQL
@@ -586,6 +591,11 @@ and generate congestion alerts based on the counts within each window.
    SELECT created_at, COUNT(*) AS count
    FROM users
    GROUP BY created_at;
+   ```
+10. Stop kafka cluster stack with -v to remove volumes
+
+   ```bash
+   docker-compose down -v
    ```
 
 
