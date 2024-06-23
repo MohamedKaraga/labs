@@ -510,6 +510,34 @@ Transform the Kafka Streams application to use windowed operations,
 For this exercise, let's assume you want to use `tumbling` windows to count the number of vehicles within a certain time window 
 and generate congestion alerts based on the counts within each window.
 
-
-
 ## Lab 09 : introduce KsqlDB {collapsible="true"}
+
+1. Start kafka cluster stack with the -d option to run in detached mode
+
+   ```bash
+   docker-compose up -d broker ksqldb ksqldb-cli
+   ```
+2. Access the ksqlDB server's web interface by navigating to http://localhost:8088 in your web browser. This should bring up the ksqlDB server interface
+3. Access the ksqlDB CLI to run ksqlDB queries
+
+   ```bash
+   docker-compose exec ksqldb-cli
+   ```
+4. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
+
+   ```SQL
+   CREATE STREAM users_stream (
+   id INT,
+   name VARCHAR,
+   email VARCHAR,
+   created_at VARCHAR
+   ) WITH (
+   KAFKA_TOPIC='postgres-users',
+   VALUE_FORMAT='JSON'
+   );
+   ```
+5. Query the users_stream to see the data
+
+   ```SQL
+   SELECT * FROM users_stream EMIT CHANGES;
+   ```
