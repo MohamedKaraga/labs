@@ -388,11 +388,6 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
    docker-compose exec -u root connect confluent-hub install confluentinc/kafka-connect-jdbc:10.7.6
    ```
    
-3. Restart the connect container
-
-   ```bash
-   docker-compose restart connect
-   ```
    **Output**
    ```Console
    The component can be installed in any of the following Confluent Platform installations: 
@@ -427,7 +422,12 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
    Completed
 
    ```
+3. Restart the connect container
 
+   ```bash
+   docker-compose restart connect
+   ```
+   
 4. Access the PostgreSQL Container
 
    ```bash
@@ -526,7 +526,7 @@ and generate congestion alerts based on the counts within each window.
 4. Inside the shell, connect to the ksqlDB server using the ksqlDB CLI
 
    ```bash
-   http://ksqldb-server:8088
+   ksql http://ksqldb-server:8088
    ```
 
 5. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
