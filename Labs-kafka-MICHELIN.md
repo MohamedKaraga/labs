@@ -556,11 +556,15 @@ and generate congestion alerts based on the counts within each window.
 8. Enter the following JSON messages, each representing a user record
 
    ```JSON
-   {"id": 1, "name": "😀 John Doe", "email": "john.doe@example.com", "created_at": "2024-06-23T12:00:00Z"}
+   {"id": 1, "name": "toto", "email": "toto.doe@example.com", "created_at": "2024-06-23T12:00:00Z"}
    ```   
+
+   ```JSON
+   {"id": 2, "name": "titi", "email": "titi@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   ```
    
-9. ```JSON
-   {"id": 2, "name": "😃 Jane Smith", "email": "jane.smith@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   ```JSON
+   {"id": 3, "name": "tata", "email": "tata@example.com", "created_at": "2024-06-23T12:05:00Z"}
    ```
 
 
