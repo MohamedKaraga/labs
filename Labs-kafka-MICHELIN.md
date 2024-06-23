@@ -589,10 +589,16 @@ and generate congestion alerts based on the counts within each window.
    ```SQL
    CREATE TABLE user_counts AS
    SELECT created_at, COUNT(*) AS count
-   FROM users
+   FROM users_stream
    GROUP BY created_at;
    ```
-10. Stop kafka cluster stack with -v to remove volumes
+10. Query the user_counts to see the data
+
+   ```SQL
+   SELECT * FROM user_counts EMIT CHANGES;
+   ```
+
+11. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
    docker-compose down -v
