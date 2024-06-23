@@ -532,7 +532,7 @@ and generate congestion alerts based on the counts within each window.
 5. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
 
    ```SQL
-   CREATE STREAM users_stream (id INT, name VARCHAR, email VARCHAR, created_at VARCHAR) WITH (KAFKA_TOPIC='postgres-users',VALUE_FORMAT='JSON');
+   CREATE STREAM users_stream (id INT, name VARCHAR, email VARCHAR, created_at VARCHAR) WITH (KAFKA_TOPIC='users',VALUE_FORMAT='JSON');
    ```
 6. Query the users_stream to see the data
 
@@ -542,16 +542,16 @@ and generate congestion alerts based on the counts within each window.
    
 7. In new terminal, use the Kafka console producer to send messages to the `users` topic 
 
-* Run inside `broker` container console
-   ```bash
-   docker-compose exec broker /bin/bash
-   ```
+   * Run inside `broker` container console
+      ```bash
+      docker-compose exec broker /bin/bash
+      ```
   
-* Run Kafka console producer
+   * Run Kafka console producer
 
-   ```bash
-   kafka-console-producer --bootstrap-server kafka:9092 --topic users
-   ``` 
+      ```bash
+      kafka-console-producer --bootstrap-server kafka:9092 --topic users
+      ``` 
    
 8. Enter the following JSON messages, each representing a user record
 
