@@ -393,11 +393,45 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
    ```bash
    docker-compose restart connect
    ```
+   **Output**
+   ```Console
+   The component can be installed in any of the following Confluent Platform installations: 
+   1. / (installed rpm/deb package)
+   2. / (where this tool is installed)
+      Choose one of these to continue the installation (1-2): 1
+      Do you want to install this into /usr/share/confluent-hub-components? (yN) N
+   
+   Specify installation directory: /usr/share/java/kafka
+   
+   Component's license:
+   Confluent Community License
+   https://www.confluent.io/confluent-community-license
+   I agree to the software license agreement (yN) y
+   
+   Downloading component Kafka Connect JDBC 10.7.6, provided by Confluent, Inc. from Confluent Hub and installing into /usr/share/java/kafka
+   Detected Worker's configs:
+   1. Standard: /etc/kafka/connect-distributed.properties
+   2. Standard: /etc/kafka/connect-standalone.properties
+   3. Standard: /etc/schema-registry/connect-avro-distributed.properties
+   4. Standard: /etc/schema-registry/connect-avro-standalone.properties
+   5. Used by Connect process with PID : /etc/kafka-connect/kafka-connect.properties
+      Do you want to update all detected configs? (yN) y
+   
+   Adding installation directory to plugin path in the following files:
+   /etc/kafka/connect-distributed.properties
+   /etc/kafka/connect-standalone.properties
+   /etc/schema-registry/connect-avro-distributed.properties
+   /etc/schema-registry/connect-avro-standalone.properties
+   /etc/kafka-connect/kafka-connect.properties
+   
+   Completed
+
+   ```
 
 4. Access the PostgreSQL Container
 
    ```bash
-   docker-compose exec postgres psql -U myuser -d mydatabase
+   docker-compose exec postgres psql -U myuser -d lab
    ```
 5. Inside the PostgreSQL container, create a table named `users` and insert some sample data
 
@@ -428,7 +462,7 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
    "connection.url":"jdbc:postgresql://postgres:5432/lab",
    "connection.user":"myuser",
    "connection.password":"mypassword",
-   "table.whitelist":"user",
+   "table.whitelist":"users",
    "mode":"incrementing",
    "incrementing.column.name":"id",
    "topic.prefix":"postgres-",
