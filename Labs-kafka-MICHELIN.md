@@ -104,7 +104,7 @@ _**Open separate terminal windows for next steps**_
 2. Analyzing the Docker Compose File
 3. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center
    ```
    
 4. Show running containers
@@ -166,7 +166,7 @@ _**Open separate terminal windows for next steps**_
 3. complete code for `ProducerConfig`, `ProducerRecord`, and `KafkaProducer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center
    ```
 5. build and run producer
 6. Run the producer with different configurations for `linger.ms` and `batch.size` to observe their effects on message batching and sending time.
@@ -196,7 +196,7 @@ _**Open separate terminal windows for next steps**_
 3. complete code for `ConsumerConfig`, `KafkaConsumer`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center
    ```
 5. build and run consumer
 
@@ -211,7 +211,7 @@ _**Open separate terminal windows for next steps**_
 
 1. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center rest-proxy
    ```
 2. Produce messages to a Kafka topic using REST Proxy
    * Create a Kafka topic
@@ -259,7 +259,7 @@ _**Open separate terminal windows for next steps**_
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center schema-registry
    ```
 2. Register the schema
 
@@ -379,7 +379,7 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center postgres connect
    ```
    
 2. Install JDBC Connector
@@ -501,7 +501,7 @@ You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@ya
 3. complete code for `StreamsConfig`, `StreamsBuilder` and `KafkaStreams`.
 4. Start kafka cluster stack with the -d option to run in detached mode:
    ```bash
-   docker-compose up -d
+   docker-compose up -d broker control-center
    ```
 5. build and run kafkastream
 6. Advanced : apply windowed aggregation to count the number of vehicles every 1 minute
@@ -515,7 +515,7 @@ and generate congestion alerts based on the counts within each window.
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
-   docker-compose up -d broker ksqldb-server ksqldb-cli
+   docker-compose up -d broker control-center ksqldb-server ksqldb-cli
    ```
 2. Access the ksqlDB server's web interface by navigating to http://localhost:8088 in your web browser. This should bring up the ksqlDB server interface
 3. Access the ksqlDB CLI to run ksqlDB queries
