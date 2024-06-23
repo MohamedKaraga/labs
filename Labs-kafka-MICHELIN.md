@@ -526,21 +526,13 @@ and generate congestion alerts based on the counts within each window.
 4. Inside the shell, connect to the ksqlDB server using the ksqlDB CLI
 
    ```bash
-   ksql http://ksqldb:8088
+   http://ksqldb-server:8088
    ```
 
 5. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
 
    ```SQL
-   CREATE STREAM users_stream (
-   id INT,
-   name VARCHAR,
-   email VARCHAR,
-   created_at VARCHAR
-   ) WITH (
-   KAFKA_TOPIC='postgres-users',
-   VALUE_FORMAT='JSON'
-   );
+   CREATE STREAM users_stream (id INT, name VARCHAR, email VARCHAR, created_at VARCHAR) WITH (KAFKA_TOPIC='postgres-users',VALUE_FORMAT='JSON');
    ```
 6. Query the users_stream to see the data
 
