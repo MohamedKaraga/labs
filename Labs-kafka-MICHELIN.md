@@ -539,3 +539,21 @@ and generate congestion alerts based on the counts within each window.
    ```SQL
    SELECT * FROM users_stream EMIT CHANGES;
    ```
+   
+7. In new terminal, use the Kafka console producer to send messages to the `users` topic
+
+   ```bash
+   kafka-console-producer --bootstrap-server kafka:9092 --topic users
+   ``` 
+   
+8. Enter the following JSON messages, each representing a user record
+
+   ```JSON
+   {"id": 1, "name": "😀 John Doe", "email": "john.doe@example.com", "created_at": "2024-06-23T12:00:00Z"}
+   ```   
+   
+9. ```JSON
+   {"id": 2, "name": "😃 Jane Smith", "email": "jane.smith@example.com", "created_at": "2024-06-23T12:05:00Z"}
+   ```
+
+
