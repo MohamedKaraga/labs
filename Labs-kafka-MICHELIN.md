@@ -98,7 +98,7 @@ _**Open separate terminal windows for next steps**_
 1. Download or copy the contents of the Confluent Platform KRaft Docker Compose file
 
    ```bash
-    wget https://github.com/MohamedKaraga/labs/blob/master/docker-compose.yml
+    wget https://raw.githubusercontent.com/MohamedKaraga/labs/master/docker-compose.yml
    ```
 
 2. Analyzing the Docker Compose File
