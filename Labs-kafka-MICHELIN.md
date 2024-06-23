@@ -515,7 +515,7 @@ and generate congestion alerts based on the counts within each window.
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
-   docker-compose up -d broker ksqldb ksqldb-cli
+   docker-compose up -d broker ksqldb-server ksqldb-cli
    ```
 2. Access the ksqlDB server's web interface by navigating to http://localhost:8088 in your web browser. This should bring up the ksqlDB server interface
 3. Access the ksqlDB CLI to run ksqlDB queries
