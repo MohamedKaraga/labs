@@ -523,7 +523,13 @@ and generate congestion alerts based on the counts within each window.
    ```bash
    docker-compose exec ksqldb-cli bash
    ```
-4. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
+4. Inside the shell, connect to the ksqlDB server using the ksqlDB CLI
+
+   ```bash
+   ksql http://ksqldb:8088
+   ```
+
+5. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
 
    ```SQL
    CREATE STREAM users_stream (
@@ -536,7 +542,7 @@ and generate congestion alerts based on the counts within each window.
    VALUE_FORMAT='JSON'
    );
    ```
-5. Query the users_stream to see the data
+6. Query the users_stream to see the data
 
    ```SQL
    SELECT * FROM users_stream EMIT CHANGES;
