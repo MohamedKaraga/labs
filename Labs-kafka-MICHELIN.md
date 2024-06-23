@@ -115,7 +115,7 @@ _**Open separate terminal windows for next steps**_
    
 5. Run inside `broker` container console
    ```bash
-   docker exec -it broker /bin/bash
+   docker-compose exec broker /bin/bash
    ```
    
 **_run the following command in `broker` container console_**
@@ -540,7 +540,14 @@ and generate congestion alerts based on the counts within each window.
    SELECT * FROM users_stream EMIT CHANGES;
    ```
    
-7. In new terminal, use the Kafka console producer to send messages to the `users` topic
+7. In new terminal, use the Kafka console producer to send messages to the `users` topic 
+
+* Run inside `broker` container console
+   ```bash
+   docker-compose exec broker /bin/bash
+   ```
+  
+* Run Kafka console producer
 
    ```bash
    kafka-console-producer --bootstrap-server kafka:9092 --topic users
