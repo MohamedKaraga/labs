@@ -521,7 +521,7 @@ and generate congestion alerts based on the counts within each window.
 3. Access the ksqlDB CLI to run ksqlDB queries
 
    ```bash
-   docker-compose exec ksqldb-cli
+   docker-compose exec ksqldb-cli bash
    ```
 4. Create a stream in ksqlDB using the following query. For example, to create a stream for the users topic
 
