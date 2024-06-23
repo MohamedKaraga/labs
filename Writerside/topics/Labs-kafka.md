@@ -375,6 +375,80 @@ _**Open separate terminal windows for next steps**_
 You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
 
 ## Lab 07 : Deploy a kafka connect {collapsible="true"}
+
+1. Start kafka cluster stack with the -d option to run in detached mode
+
+   ```bash
+   docker-compose up -d
+   ```
+   
+2. Install JDBC Connector
+
+   ```bash
+   docker-compose exec -u root connect confluent-hub install confluentinc/kafka-connect-jdbc:10.7.6
+   ```
+   
+3. Restart the connect container
+
+   ```bash
+   docker-compose restart connect
+   ```
+
+4. Access the PostgreSQL Container
+
+   ```bash
+   docker-compose exec postgres psql -U myuser -d mydatabase
+   ```
+5. Inside the PostgreSQL container, create a table named `users` and insert some sample data
+
+   ```SQL
+   -- Create the users table
+   CREATE TABLE users (
+   id SERIAL PRIMARY KEY,
+   name VARCHAR(100),
+   email VARCHAR(100),
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   
+   -- Insert sample data into the users table
+   INSERT INTO users (name, email) VALUES
+   ('toto', 'toto@example.com'),
+   ('titi', 'titi@example.com'),
+   ('tata', 'tata@example.com');
+   ```
+
+6. Create the jdbc-source-config.json file for the JDBC Source connector to pull data from this users table and publish it to a Kafka topic
+
+   ```JSON
+   {
+   "name":"jdbc-source-connector",
+   "config":{
+   "connector.class":"io.confluent.connect.jdbc.JdbcSourceConnector",
+   "tasks.max":"1",
+   "connection.url":"jdbc:postgresql://postgres:5432/lab",
+   "connection.user":"myuser",
+   "connection.password":"mypassword",
+   "table.whitelist":"user",
+   "mode":"incrementing",
+   "incrementing.column.name":"id",
+   "topic.prefix":"postgres-",
+   "poll.interval.ms":"10000"
+   }
+   }
+   ```
+   
+7. Deploy the JDBC Source Connector
+
+   ```bash
+   curl -X POST -H "Content-Type: application/json" --data @jdbc-source-config.json http://connect:8083/connectors
+   ```
+8. Check the status of the JDBC Source connector
+
+   ```bash
+   curl -X GET http://connect:8083/connectors/jdbc-source-connector/status
+   ```
+9. Use Control center to verify the data is being published from the PostgreSQL users table
+
 ## Lab 08 : Basic kafka stream {collapsible="true"}
 
 * You will create a simple Kafka Streams application that reads data from a source topic
