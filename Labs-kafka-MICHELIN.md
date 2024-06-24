@@ -247,12 +247,7 @@ _**Open separate terminal windows for next steps**_
    curl -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
    http://localhost:8082/consumers/my_consumer_group/instances/my_consumer_instance/records
    ```
-4. Commit consumer offsets using REST Proxy
-   ```bash
-   curl -X POST -H "Content-Type: application/vnd.kafka.v2+json" \
-   --data '{"offsets": [{"topic": "bar", "partition": 0, "offset": 10}]}' \
-   http://localhost:8082/consumers/my_consumer_group/instances/my_consumer_instance/offsets
-   ```
+   
 5. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
