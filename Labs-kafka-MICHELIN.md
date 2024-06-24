@@ -247,7 +247,6 @@ _**Open separate terminal windows for next steps**_
    curl -X GET -H "Accept: application/vnd.kafka.json.v2+json" \
    http://localhost:8082/consumers/my_consumer_group/instances/my_consumer_instance/records
    ```
-   
 5. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
