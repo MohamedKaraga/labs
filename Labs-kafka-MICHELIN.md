@@ -380,7 +380,6 @@ _**Open separate terminal windows for next steps**_
      
    * Execute the Consumer class and verify that the consumer reads the message from the `users` topic.
 
-You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
 
 ## Lab 07 : Deploy a kafka connect {collapsible="true"}
 
@@ -613,3 +612,4 @@ and generate congestion alerts based on the counts within each window.
    ```
 
 
+You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
