@@ -270,6 +270,15 @@ _**Open separate terminal windows for next steps**_
 3. Produce messages using avro schema
 
    * Transform your producer **Lab 03** using schema and schema registry API.
+   * add confluent maven repository
+   ```xml
+     <repositories>
+    <repository>
+      <id>confluent</id>
+      <url>https://packages.confluent.io/maven/</url>
+    </repository>
+   </repositories>     
+   ```
    * Add Maven Avro and Schema Registry dependencies
 
         ```xml
@@ -301,7 +310,7 @@ _**Open separate terminal windows for next steps**_
        }
      ```
 
-   * Add the Avro Maven plugin to your `pom.xml` to generate Java classes from the Avro schema
+   * Add the Avro Maven plugin to your producer and consumer `pom.xml` to generate Java classes from the Avro schema
 
      ```xml
      <build>
