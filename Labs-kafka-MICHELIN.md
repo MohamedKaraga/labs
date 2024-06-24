@@ -214,6 +214,11 @@ _**Open separate terminal windows for next steps**_
    docker-compose up -d broker control-center rest-proxy
    ```
 2. Produce messages to a Kafka topic using REST Proxy
+
+   * Run inside `broker` container console
+      ```bash
+      docker-compose exec broker /bin/bash
+      ```
    * Create a Kafka topic
    ```bash
    kafka-topics --create --topic bar --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1
