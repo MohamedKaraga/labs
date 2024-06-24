@@ -267,12 +267,12 @@ _**Open separate terminal windows for next steps**_
    --data '{"schema": "{\"type\":\"record\",\"name\":\"User\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"age\",\"type\":\"int\"},{\"name\":\"email\",\"type\":[\"null\",\"string\"],\"default\":null}]}"}' \
    http://localhost:8081/subjects/user-value/versions
    ```
-3. Produce messages using avro schema
+3. Produce and consume messages using avro schema
 
-   * Transform your producer **Lab 03** using schema and schema registry API.
+   * Transform your producer **Lab 03** and consumer **Lab 04** using schema and schema registry API.
    * add confluent maven repository
    ```xml
-     <repositories>
+    <repositories>
     <repository>
       <id>confluent</id>
       <url>https://packages.confluent.io/maven/</url>
