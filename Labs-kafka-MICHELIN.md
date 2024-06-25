@@ -222,7 +222,7 @@ _**Open separate terminal windows for next steps**_
       ```
    * Create a Kafka topic
    ```bash
-   kafka-topics --create --topic bar --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1
+   kafka-topics --create --topic bar --bootstrap-server broker:9092 --partitions 1 --replication-factor 1
    ```
    * Produce a JSON message to the topic
    ```bash
