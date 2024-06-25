@@ -477,7 +477,17 @@ _**Open separate terminal windows for next steps**_
    docker-compose restart connect
    ```
 
-5. Create the `jdbc-source-config.json` file for the JDBC Source connector to pull data from this users table and publish it to a Kafka topic
+5. Inside the PostgreSQL container, create a table named `users`
+
+   ```SQL
+   CREATE TABLE users (
+   id SERIAL PRIMARY KEY,
+   name VARCHAR(100),
+   email VARCHAR(100),
+   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   );
+   ```
+6. Create the `jdbc-source-config.json` file for the JDBC Source connector to pull data from this users table and publish it to a Kafka topic
 
    ```JSON
    {
@@ -500,18 +510,18 @@ _**Open separate terminal windows for next steps**_
    }
    ```
    
-6. Deploy the JDBC Source Connector
+7. Deploy the JDBC Source Connector
 
    ```bash
    curl -X POST -H "Content-Type: application/json" --data @jdbc-source-config.json http://connect:8083/connectors
    ```
-7. Check the status of the JDBC Source connector
+8. Check the status of the JDBC Source connector
 
    ```bash
    curl -X GET http://connect:8083/connectors/jdbc-source-connector/status
    ```
 
-8. Create the `mongo-sink-config.json` file for the MongoDB Sink connector to pull data from this users topic and store in mongoDB
+9. Create the `mongo-sink-config.json` file for the MongoDB Sink connector to pull data from this users topic and store in mongoDB
 
    ```JSON
    {
@@ -531,33 +541,24 @@ _**Open separate terminal windows for next steps**_
    }
    ```
 
-9. Deploy the MongoDB Sink Connector
+10. Deploy the MongoDB Sink Connector
 
    ```bash
    curl -X POST -H "Content-Type: application/json" --data @mongo-sink-config.json http://connect:8083/connectors
    ```
-10. Check the status of the JDBC Source connector
+11. Check the status of the JDBC Source connector
 
    ```bash
    curl -X GET http://connect:8083/connectors/mongodb-sink-connector/status
    ```
-11. Access the PostgreSQL Container
+
+12. Access the PostgreSQL container and Insert sample data into the `users` table
 
    ```bash
    docker-compose exec postgres psql -U myuser -d lab
    ```
-12. Inside the PostgreSQL container, create a table named `users` and insert some sample data
 
    ```SQL
-   -- Create the users table
-   CREATE TABLE users (
-   id SERIAL PRIMARY KEY,
-   name VARCHAR(100),
-   email VARCHAR(100),
-   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-   );
-   
-   -- Insert sample data into the users table
    INSERT INTO users (name, email) VALUES
    ('toto', 'toto@example.com'),
    ('titi', 'titi@example.com'),
