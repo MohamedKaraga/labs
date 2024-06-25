@@ -540,7 +540,7 @@ _**Open separate terminal windows for next steps**_
 
    ```bash
    curl -X GET http://connect:8083/connectors/mongodb-sink-connector/status
-   
+   ```
 11. Access the PostgreSQL Container
 
    ```bash
