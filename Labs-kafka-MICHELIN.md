@@ -479,6 +479,10 @@ _**Open separate terminal windows for next steps**_
 
 5. Inside the PostgreSQL container, create a table named `users`
 
+   ```bash
+   docker-compose exec postgres psql -U myuser -d lab
+   ```
+
    ```SQL
    CREATE TABLE users (
    id SERIAL PRIMARY KEY,
