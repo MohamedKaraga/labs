@@ -200,7 +200,8 @@ _**Open separate terminal windows for next steps**_
    ```
 5. build and run consumer
 
-6. Run the consumer with different configurations for `fetch.min.bytes`, `fetch.max.wait.ms`,and `max.poll.records` to observe their effects on message consumption and performance.
+6. Run the consumer with different configurations for `fetch.min.bytes (5000000)`, `fetch.max.wait.ms (5000)` to observe their effects on message consumption and performance
+
 7. Stop kafka cluster stack with -v to remove volumes
 
    ```bash
