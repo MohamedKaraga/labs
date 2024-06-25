@@ -387,7 +387,7 @@ _**Open separate terminal windows for next steps**_
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
-   docker-compose up -d broker control-center postgres connect
+   docker-compose up -d broker control-center postgres connect mongodb
    ```
    
 2. Install JDBC Connector
