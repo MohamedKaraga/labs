@@ -430,18 +430,123 @@ _**Open separate terminal windows for next steps**_
    Completed
 
    ```
-3. Restart the connect container
+   
+3. Install MongoDB Connector
+
+   ```bash
+   docker-compose exec -u root connect confluent-hub install mongodb/kafka-connect-mongodb:latest
+   ```
+   
+   **Output**
+   ```Console
+   The component can be installed in any of the following Confluent Platform installations: 
+   1. / (installed rpm/deb package)
+   2. / (where this tool is installed)
+      Choose one of these to continue the installation (1-2): 1
+      Do you want to install this into /usr/share/confluent-hub-components? (yN) N
+   
+   Specify installation directory: /usr/share/java/kafka
+   
+   Component's license:
+   Confluent Community License
+   https://www.confluent.io/confluent-community-license
+   I agree to the software license agreement (yN) y
+   
+   Downloading component Kafka Connect JDBC 10.7.6, provided by Confluent, Inc. from Confluent Hub and installing into /usr/share/java/kafka
+   Detected Worker's configs:
+   1. Standard: /etc/kafka/connect-distributed.properties
+   2. Standard: /etc/kafka/connect-standalone.properties
+   3. Standard: /etc/schema-registry/connect-avro-distributed.properties
+   4. Standard: /etc/schema-registry/connect-avro-standalone.properties
+   5. Used by Connect process with PID : /etc/kafka-connect/kafka-connect.properties
+      Do you want to update all detected configs? (yN) y
+   
+   Adding installation directory to plugin path in the following files:
+   /etc/kafka/connect-distributed.properties
+   /etc/kafka/connect-standalone.properties
+   /etc/schema-registry/connect-avro-distributed.properties
+   /etc/schema-registry/connect-avro-standalone.properties
+   /etc/kafka-connect/kafka-connect.properties
+   
+   Completed
+
+   ```
+4. Restart the connect container
 
    ```bash
    docker-compose restart connect
    ```
+
+5. Create the `jdbc-source-config.json` file for the JDBC Source connector to pull data from this users table and publish it to a Kafka topic
+
+   ```JSON
+   {
+   "name":"jdbc-source-connector",
+   "config":{
+   "connector.class":"io.confluent.connect.jdbc.JdbcSourceConnector",
+   "tasks.max":"1",
+   "connection.url":"jdbc:postgresql://postgres:5432/lab",
+   "connection.user":"myuser",
+   "connection.password":"mypassword",
+   "table.whitelist":"users",
+   "mode":"incrementing",
+   "incrementing.column.name":"id",
+   "poll.interval.ms":"10000",
+   "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+   "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+   "key.converter.schemas.enable": "false",
+   "value.converter.schemas.enable": "false"
+   }
+   }
+   ```
    
-4. Access the PostgreSQL Container
+6. Deploy the JDBC Source Connector
+
+   ```bash
+   curl -X POST -H "Content-Type: application/json" --data @jdbc-source-config.json http://connect:8083/connectors
+   ```
+7. Check the status of the JDBC Source connector
+
+   ```bash
+   curl -X GET http://connect:8083/connectors/jdbc-source-connector/status
+   ```
+
+8. Create the `mongo-sink-config.json` file for the MongoDB Sink connector to pull data from this users topic and store in mongoDB
+
+   ```JSON
+   {
+   "name": "mongodb-sink-connector",
+   "config": {
+   "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+   "tasks.max": "1",
+   "topics": "postgres-users",
+   "connection.uri": "mongodb://myuser:mypassword@mongodb:27017",
+   "database": "lab",
+   "collection": "users",
+   "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+   "key.converter.schemas.enable": "false",
+   "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+   "value.converter.schemas.enable": "false"
+    }
+   }
+   ```
+
+9. Deploy the MongoDB Sink Connector
+
+   ```bash
+   curl -X POST -H "Content-Type: application/json" --data @mongo-sink-config.json http://connect:8083/connectors
+   ```
+10. Check the status of the JDBC Source connector
+
+   ```bash
+   curl -X GET http://connect:8083/connectors/mongodb-sink-connector/status
+   
+11. Access the PostgreSQL Container
 
    ```bash
    docker-compose exec postgres psql -U myuser -d lab
    ```
-5. Inside the PostgreSQL container, create a table named `users` and insert some sample data
+12. Inside the PostgreSQL container, create a table named `users` and insert some sample data
 
    ```SQL
    -- Create the users table
@@ -458,39 +563,26 @@ _**Open separate terminal windows for next steps**_
    ('titi', 'titi@example.com'),
    ('tata', 'tata@example.com');
    ```
+13. Verify data in MongoDB 
 
-6. Create the jdbc-source-config.json file for the JDBC Source connector to pull data from this users table and publish it to a Kafka topic
+    * Inside container
+       ```bash
+       docker-compose exec mongodb /bin/bash
+       ```
+    * connect to server
 
-   ```JSON
-   {
-   "name":"jdbc-source-connector",
-   "config":{
-   "connector.class":"io.confluent.connect.jdbc.JdbcSourceConnector",
-   "tasks.max":"1",
-   "connection.url":"jdbc:postgresql://postgres:5432/lab",
-   "connection.user":"myuser",
-   "connection.password":"mypassword",
-   "table.whitelist":"users",
-   "mode":"incrementing",
-   "incrementing.column.name":"id",
-   "topic.prefix":"postgres-",
-   "poll.interval.ms":"10000"
-   }
-   }
-   ```
+        ```bash
+        mongosh "mongodb://myuser:mypassword@mongodb"
+        ```
+    * use `lab` database
+        ```bash
+        use lab;
+        ```
+    * find data
+        ```bash
+        db.users.find();
+        ```
    
-7. Deploy the JDBC Source Connector
-
-   ```bash
-   curl -X POST -H "Content-Type: application/json" --data @jdbc-source-config.json http://connect:8083/connectors
-   ```
-8. Check the status of the JDBC Source connector
-
-   ```bash
-   curl -X GET http://connect:8083/connectors/jdbc-source-connector/status
-   ```
-9. Use Control center to verify the data is being published from the PostgreSQL users table
-
 ## Lab 08 : Basic kafka stream {collapsible="true"}
 
 * You will create a simple Kafka Streams application that reads data from a source topic
