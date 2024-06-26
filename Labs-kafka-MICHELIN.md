@@ -384,6 +384,12 @@ _**Open separate terminal windows for next steps**_
 
 ## Lab 07 : Deploy a kafka connect {collapsible="true"}
 
+0. docker-compose file
+
+   ```yaml
+      
+   ```
+
 1. Start kafka cluster stack with the -d option to run in detached mode
 
    ```bash
@@ -533,7 +539,7 @@ _**Open separate terminal windows for next steps**_
    "config": {
    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
    "tasks.max": "1",
-   "topics": "postgres-users",
+   "topics": "users",
    "connection.uri": "mongodb://myuser:mypassword@mongodb:27017",
    "database": "lab",
    "collection": "users",
