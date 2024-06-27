@@ -714,6 +714,13 @@ and generate congestion alerts based on the counts within each window.
    ```bash
    docker-compose down -v
    ```
-
-
+12. Extra challenge
+   * `Kafka Connect`: Use Kafka Connect to stream data from your postgresSql database into a Kafka topic `users`.
+   * `ksqlDB`: Use ksqlDB to create a stream from that topic and run real-time SQL queries to process and analyze the data. 
+   * `Steps`: 
+     * Deploy Kafka Connect (`JDBC Source Connector lab 07`) to Stream Data into Kafka 
+     * Use ksqlDB Query the `users_stream` to see the data in `push mode`
+     
+**The last one :) Change JDBC kafka connect to process `insert`, `update` and `delete` data.**
+   
 You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
