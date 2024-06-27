@@ -721,6 +721,8 @@ and generate congestion alerts based on the counts within each window.
      * Deploy Kafka Connect (`JDBC Source Connector lab 07`) to Stream Data into Kafka 
      * Use ksqlDB Query the `users_stream` to see the data in `push mode`
      
-**The last one :) Change JDBC kafka connect to process `insert`, `update` and `delete` data.**
+**The last one :) Change JDBC kafka connect (use `timestamp+incrementing` mode) to process `insert` and `update` data.**
+
+
    
 You can also always email me at [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
