@@ -68,20 +68,19 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
 7. Vérifier le Cluster
 
    * Vérifiez les logs du broker : Assurez-vous qu’il n’y a pas d’erreurs, que le broker démarre correctement et qu’il participe au quorum KRaft.
-   * 
    * Création des topics : Utilisez l'outil CLI Kafka pour créer un topic et vérifiez qu'il est créé dans le cluster.
-   * créer d'abord le topic technique `__consumer_offsets`
-   ```bash
-   bin/kafka-topics.sh --create --topic __consumer_offsets --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
-   ```
-   * puis créer le topic metier `foo`
-   ```bash
-   bin/kafka-topics.sh --create --topic foo --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
-   ```
-   * Décrivez le topic
-   ```bash
-   bin/kafka-topics.sh --describe --topic foo --bootstrap-server localhost:9092
-   ```
+      * créer d'abord le topic technique `__consumer_offsets`
+      ```bash
+      bin/kafka-topics.sh --create --topic __consumer_offsets --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
+      ```
+      * puis créer le topic metier `foo`
+      ```bash
+      bin/kafka-topics.sh --create --topic foo --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
+      ```
+      * Décrivez le topic
+      ```bash
+      bin/kafka-topics.sh --describe --topic foo --bootstrap-server localhost:9092
+      ```
 7. Exécutez `kafka-console-producer` pour produire des messages dans le topic foo :
    ```bash
    bin/kafka-console-producer.sh --topic foo --bootstrap-server localhost:9092
