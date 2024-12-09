@@ -81,6 +81,10 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
       ```bash
       bin/kafka-topics.sh --describe --topic foo --bootstrap-server localhost:9092
       ```
+   * Arreter puis relancer le cluster
+   ```bash
+   bin/kafka-server-start.sh config/server.properties
+   ```
 7. Exécutez `kafka-console-producer` pour produire des messages dans le topic foo :
    ```bash
    bin/kafka-console-producer.sh --topic foo --bootstrap-server localhost:9092
