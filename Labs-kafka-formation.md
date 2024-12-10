@@ -208,10 +208,11 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
    docker-compose up -d broker control-center
    ```
 5. Construire et exécuter le consommateur
+6. Relancez le producer utilisé dans le `Lab 03` pour alimenter le topic 
 
-6. Exécutez le consommateur avec les differentes configurations pour `fetch.min.bytes (5000000)`, `fetch.max.wait.ms (5000)` pour observer leurs effets sur la consommation des messages et les performances
+7. Exécutez le consommateur avec les differentes configurations pour `fetch.min.bytes (5000000)`, `fetch.max.wait.ms (5000)` pour observer leurs effets sur la consommation des messages et les performances
 
-7. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
+8. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
 
    ```bash
    docker-compose down -v
