@@ -159,7 +159,7 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
 ## Lab 03 : Producer {collapsible="true"}
 
 * Simuler des producteurs Kafka intégré dans des appareils IoT servant à collecter les données des capteurs.
-* Configurer les producteurs pour publier les données des capteurs dans un topic Kafka représentant différents capteurs.
+* Configurer le producteur pour publier les données des capteurs dans un topic Kafka.
 * Configurer le batching, la compression pour optimiser la transmission des données.
 
 1. Exécutez la commande suivante dans le terminal pour cloner le projet :
