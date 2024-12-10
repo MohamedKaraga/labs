@@ -390,6 +390,12 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
      ```
      
    * Exécutez la classe Consumer et vérifiez que le consommateur lit le message du topic `users`.
+     
+5. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
+
+   ```bash
+   docker-compose down -v
+   ```
 
 
 ## Lab 07 : Deployer un kafka connect {collapsible="true"}
