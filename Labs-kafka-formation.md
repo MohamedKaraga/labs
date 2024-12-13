@@ -604,6 +604,11 @@ _**Ouvrez des fenêtres de terminal séparées pour les étapes suivantes**_
         ```bash
         db.users.find();
         ```
+14. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
+
+   ```bash
+   docker-compose down -v
+   ```
    
 ## Lab 08 : Basic kafka stream {collapsible="true"}
 
