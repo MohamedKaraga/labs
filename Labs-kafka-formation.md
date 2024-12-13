@@ -637,6 +637,12 @@ Transformez l'application Kafka Streams pour utiliser des opérations avec fenê
 Pour cet exercice, supposons que vous souhaitez utiliser des fenêtres `tumbling` pour compter le nombre de véhicules dans une fenêtre temporelle donnée
 et générer des alertes de congestion basées sur les comptages dans chaque fenêtre.
 
+7. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
+
+   ```bash
+   docker-compose down -v
+   ```
+
 ## Lab 09 : KsqlDB {collapsible="true"}
 
 1. Démarrez le cluster Kafka avec l'option -d pour l'exécuter en mode détaché:
