@@ -732,12 +732,7 @@ et générer des alertes de congestion basées sur les comptages dans chaque fen
    SELECT * FROM user_counts EMIT CHANGES;
    ```
 
-11. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
-
-   ```bash
-   docker-compose down -v
-   ```
-12. Extra challenge
+11. Extra challenge
    * `Kafka Connect`: Utilisez Kafka Connect pour diffuser les données de votre base de données PostgreSQL vers un topic Kafka `users`.
    * `ksqlDB`: utilisez ksqlDB pour créer un stream à partir de ce topic et exécuter des requêtes SQL en temps réel pour traiter et analyser les données. 
    * `Steps`: 
@@ -745,6 +740,13 @@ et générer des alertes de congestion basées sur les comptages dans chaque fen
      * Faire une requette ksqlDB `users_stream` pour voir les données en mode `push`
 
 La dernière étape :) Changez la connexion JDBC Kafka (utilisez le mode `timestamp+incrementing`) pour traiter les données `insert` et `update`.
+
+
+12. Arrêter le cluster Kafka avec l'option -v pour supprimer les volumes
+
+   ```bash
+   docker-compose down -v
+   ```
 
    
 Vous pouvez m'envoyer un e-mail à [mohamedkaraga@yahoo.fr](mailto:mohamedkaraga@yahoo.fr).
